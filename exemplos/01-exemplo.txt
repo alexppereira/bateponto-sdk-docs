@@ -1,0 +1,5 @@
+bateponto-sdk/
+├── SDK-LEIA-ME.md
+└── maven/
+    ├── com/pontotel/bateponto/sdk/0.1.0-local/
+    └── ... dependências e metadados dos demais módulos

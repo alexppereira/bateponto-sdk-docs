@@ -1,0 +1,3 @@
+dependencies {
+    implementation("com.pontotel.bateponto:sdk:0.1.0-local")
+}

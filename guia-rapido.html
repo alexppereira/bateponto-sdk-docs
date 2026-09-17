@@ -1,0 +1,232 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Integre o BatePonto SDK no Android ou Flutter em cinco etapas, com exemplos e checklist."><title>BatePonto SDK · Guia rápido</title><style>:root{--ink:#23202a;--muted:#66616e;--purple:#65266f;--line:#e4dfe7;--paper:#fff;--soft:#f8f6f9}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f2f0f4;color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--purple);text-underline-offset:3px}a:focus-visible,button:focus-visible{outline:3px solid #b885c0;outline-offset:4px}.quickbar{display:flex;justify-content:space-between;gap:16px;align-items:center;max-width:940px;margin:auto;padding:22px 30px}.quickbar b{font-size:19px}.quickbar small{font-weight:400;color:var(--muted)}.quickbar nav{display:flex;gap:18px}.quickbar a{font-size:13px}.skip{position:absolute;left:16px;top:-60px;background:white;padding:8px}.skip:focus{top:8px}.quick-nav{max-width:880px;margin:0 auto 24px;display:flex;gap:8px;flex-wrap:wrap}.quick-nav a{background:white;border:1px solid var(--line);padding:7px 12px;border-radius:6px;font-size:12px;text-decoration:none}main{max-width:880px;margin:0 auto 40px}.quick-page{background:var(--paper);padding:42px 54px;margin-bottom:24px;border:1px solid var(--line);border-radius:12px;box-shadow:0 5px 24px #20152a06}.page-meta{display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:25px}.page-meta strong{color:var(--purple)}h2{font-size:32px;line-height:1.15;letter-spacing:-1px;margin:0 0 24px;max-width:650px}h3{font-size:18px;line-height:1.35;margin:25px 0 10px}p{margin:11px 0}table{border-collapse:collapse;width:100%;font-size:13px;margin:14px 0}th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--soft)}code{font: .9em ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.code-block{border:1px solid var(--line);border-radius:7px;background:var(--soft);margin:14px 0;overflow:hidden}.code-toolbar{display:flex;justify-content:space-between;align-items:center;padding:5px 12px;border-bottom:1px solid var(--line);font-size:10px;color:var(--muted)}.copy-button{display:none;border:0;background:transparent;color:var(--purple);font:inherit;cursor:pointer}.js-ready .copy-button{display:block}pre{padding:12px 14px;margin:0;overflow-x:auto;font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}pre code{font:inherit;overflow-wrap:normal}ol{padding-left:22px}li{padding:3px 0}footer{max-width:880px;margin:0 auto 35px;padding:0 20px;color:var(--muted);font-size:12px}.k,.kd,.kn{color:#783582}.s,.s1,.s2{color:#2e6546}.c,.c1{color:#72707a}.status{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;border-radius:6px;padding:8px 14px;font-size:12px}.status:empty{display:none}
+@media(max-width:700px){body{font-size:14px}.quickbar{padding:18px 20px;align-items:flex-start}.quickbar b{font-size:16px}.quickbar small{display:block;font-size:11px}.quickbar nav{flex-direction:column;gap:4px;text-align:right}.quick-nav{padding:0 20px;gap:6px}.quick-page{padding:28px 20px;border-radius:0;border-left:0;border-right:0}h2{font-size:27px}th,td{padding:7px 5px;font-size:12px}.page-meta{font-size:9px}.page-meta span{max-width:100px;text-align:right}main{margin-bottom:20px}}
+@page{size:A4;margin:15mm 16mm 17mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:9.5pt;line-height:1.43;color:#25212b}.quickbar,.quick-nav,.skip,footer,.copy-button,.status{display:none!important}main{max-width:none;margin:0}.quick-page{border:0;border-radius:0;box-shadow:none;padding:0;margin:0;break-after:page}.quick-page:last-child{break-after:auto}.page-meta{font-size:8pt;padding-bottom:3mm;margin-bottom:6mm}.page-meta span{max-width:none}.page-meta strong{color:#65266f}h2{font-size:25pt;line-height:1.13;margin:0 0 5mm;letter-spacing:-.6pt}h3{font-size:12pt;margin:4.5mm 0 2mm;break-after:avoid}p{margin:2.5mm 0;orphans:3;widows:3}table{font-size:9pt;margin:3mm 0}th,td{padding:1.6mm 2.5mm;font-size:inherit}tr{break-inside:avoid}a{color:#65266f;text-decoration:underline}code{font-size:8.4pt}.code-block{margin:3mm 0;border-radius:1.5mm;break-inside:avoid}.code-toolbar{font-size:7pt;padding:1mm 3mm}pre{padding:2.5mm 3mm;font-size:8pt;line-height:1.4;white-space:pre-wrap;overflow:visible}pre code{font:inherit}ol{padding-left:5mm;margin:2mm 0}li{padding:.7mm 0}}
+</style></head><body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a><header class="quickbar"><b>BatePonto <small>/ Developers</small></b><nav aria-label="Formatos e referência"><a href="BatePonto-SDK-Guia-Rapido.pdf">Guia rápido em PDF ↗</a><a href="index.html">Referência completa →</a></nav></header><nav class="quick-nav" aria-label="Etapas"><a href="#passo-1">1. Preparação</a><a href="#passo-2">2. Configuração</a><a href="#passo-3">3. Android / ponte</a><a href="#passo-4">4. Flutter / botão</a><a href="#passo-5">5. Validação</a></nav><main id="conteudo"><section class="quick-page" id="passo-1" aria-labelledby="titulo-1"><div class="page-meta"><strong>BatePonto / Guia rápido</strong><span>Android · 0.1.0-local · 01 / 05</span></div><h2 id="titulo-1">Prepare a integração</h2>
+<p>Adicione um botão ao seu aplicativo. O BatePonto abre em tela cheia, conduz o login e a navegação e permite retornar ao hospedeiro. <strong>Siga os passos comuns e depois a trilha Android ou Flutter.</strong></p>
+<h3>Confira os requisitos</h3>
+<p>Use um aplicativo Android ou Flutter que já compile. Esta é a configuração de referência dos exemplos:</p>
+<table>
+<thead>
+<tr>
+<th>Configuração</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plataforma / arquitetura</td>
+<td>Android / <code>arm64-v8a</code></td>
+</tr>
+<tr>
+<td>Android SDK</td>
+<td><code>compileSdk</code> e <code>targetSdk</code> 36; <code>minSdk</code> 26</td>
+</tr>
+<tr>
+<td>Java / alvo JVM / Kotlin</td>
+<td>17 / 17 / 2.1.20</td>
+</tr>
+<tr>
+<td>Android Gradle Plugin</td>
+<td>8.12.0</td>
+</tr>
+<tr>
+<td>Gradle</td>
+<td>Nativo: 9.0.0 · Flutter: 8.13</td>
+</tr>
+<tr>
+<td>Flutter / Dart</td>
+<td>3.24.5 / 3.5.4 no exemplo Flutter</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Limites desta prévia:</strong> execução exercitada em emulador API 36 ARM64 com páginas de 4 KB. Outras versões, aparelhos físicos e páginas de 16 KB precisam de homologação. O SDK declara mínimo API 24; os exemplos usam 26. Nenhum desses mínimos comprova toda a matriz Android.</p>
+<p>Hospedeiro com <strong>React Native</strong> requer adaptação; integração direta não suportada. <strong>Firebase próprio</strong> exige análise de coexistência antes de integrar. Push do BatePonto está desativado. iOS, x86 e ARM de 32 bits não estão incluídos.</p>
+<h3>Organize os arquivos</h3>
+<p>Extraia <code>bateponto-sdk-android-local.zip</code> para obter a estrutura abaixo. Preserve a pasta <strong>Maven inteira</strong>, incluindo dependências, <code>.pom</code> e <code>.module</code>; apenas o AAR principal não basta.</p>
+<div class="code-block"><div class="code-toolbar"><span>Estrutura</span><button class="copy-button" aria-label="Copiar código 1" type="button">Copiar</button></div><pre><code>integracao/
+├── bateponto-sdk/maven/
+├── meu-app-android/
+│   ├── settings.gradle.kts
+│   └── app/build.gradle.kts
+└── meu-app-flutter/
+    └── android/
+        ├── settings.gradle.kts
+        └── app/build.gradle.kts
+</code></pre></div><p>O primeiro build pode precisar da internet para dependências públicas. O consumidor não precisa dos fontes BatePonto, Node ou Metro.</p>
+<p><strong>Antes de prosseguir:</strong> confira <a href="index.html#requisitos-e-compatibilidade">compatibilidade</a> e, se seu app usa Firebase, <a href="index.html#permissoes-e-manifesto">permissões e manifesto</a>.</p>
+</section><section class="quick-page" id="passo-2" aria-labelledby="titulo-2"><div class="page-meta"><strong>BatePonto / Guia rápido</strong><span>Android · 0.1.0-local · 02 / 05</span></div><h2 id="titulo-2">Configure o módulo Android</h2>
+<p>Passos comuns às duas trilhas. Os trechos usam <strong>Kotlin DSL</strong>: incorpore-os aos blocos existentes, preservando plugins, <code>namespace</code>, <code>applicationId</code> e assinatura.</p>
+<h3>1. Registre o Maven e a dependência</h3>
+<p>Em <code>settings.gradle.kts</code> — dentro de <code>android/</code> no Flutter — adicione o Maven antes dos repositórios públicos:</p>
+<div class="code-block"><div class="code-toolbar"><span>Kotlin</span><button class="copy-button" aria-label="Copiar código 2" type="button">Copiar</button></div><pre><code><span class="n">dependencyResolutionManagement</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">repositories</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">maven</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uri</span><span class="p">(</span><span class="s">"../bateponto-sdk/maven"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="n">google</span><span class="p">()</span>
+<span class="w">        </span><span class="n">mavenCentral</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p><strong>No Flutter</strong>, troque o caminho por <code>../../bateponto-sdk/maven</code>. Para Groovy (<code>.gradle</code>) ou repositórios em <code>allprojects</code>, consulte a trilha <a href="index.html#integracao-android">Android nativo</a> ou <a href="index.html#integracao-flutter">Flutter</a>. Preserve <code>pluginManagement</code> e o carregador Flutter; não duplique políticas de repositório.</p>
+<p>Em <code>app/build.gradle.kts</code> — <code>android/app/build.gradle.kts</code> no Flutter — adicione ao bloco <code>dependencies</code>:</p>
+<div class="code-block"><div class="code-toolbar"><span>Kotlin</span><button class="copy-button" aria-label="Copiar código 3" type="button">Copiar</button></div><pre><code><span class="n">implementation</span><span class="p">(</span><span class="s">"com.pontotel.bateponto:sdk:0.1.0-local"</span><span class="p">)</span>
+</code></pre></div><h3>2. Ajuste Android, Java e Kotlin</h3>
+<p>No mesmo arquivo do módulo, usando as versões da página anterior:</p>
+<div class="code-block"><div class="code-toolbar"><span>Kotlin</span><button class="copy-button" aria-label="Copiar código 4" type="button">Copiar</button></div><pre><code><span class="n">android</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">compileSdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">36</span>
+<span class="w">    </span><span class="n">defaultConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">minSdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">26</span>
+<span class="w">        </span><span class="n">targetSdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">36</span>
+<span class="w">        </span><span class="n">ndk</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">abiFilters</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">"arm64-v8a"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">compileOptions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sourceCompatibility</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JavaVersion</span><span class="p">.</span><span class="na">VERSION_17</span>
+<span class="w">        </span><span class="n">targetCompatibility</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JavaVersion</span><span class="p">.</span><span class="na">VERSION_17</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="n">kotlin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">compilerOptions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">jvmTarget</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="na">jetbrains</span><span class="p">.</span><span class="na">kotlin</span><span class="p">.</span><span class="na">gradle</span><span class="p">.</span><span class="na">dsl</span><span class="p">.</span><span class="na">JvmTarget</span><span class="p">.</span><span class="na">JVM_17</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>Em projeto somente Java, omita o bloco <code>kotlin</code>. Garanta <strong>somente ARM64</strong> nos filtros e splits da variante; o trecho não remove outras ABIs já configuradas.</p>
+<p>Em <code>gradle.properties</code> na raiz Gradle, habilite <code>android.useAndroidX=true</code>. No Flutter, o arquivo fica em <code>android/</code>; o exemplo validado também usa <code>android.enableJetifier=true</code>.</p>
+</section><section class="quick-page" id="passo-3" aria-labelledby="titulo-3"><div class="page-meta"><strong>BatePonto / Guia rápido</strong><span>Android · 0.1.0-local · 03 / 05</span></div><h2 id="titulo-3">Abra pelo Android ou crie a ponte Flutter</h2>
+<h3>Android nativo · conecte seu botão</h3>
+<p>Na Activity visível do aplicativo, com um botão já existente:</p>
+<div class="code-block"><div class="code-toolbar"><span>Kotlin</span><button class="copy-button" aria-label="Copiar código 5" type="button">Copiar</button></div><pre><code><span class="k">import</span><span class="w"> </span><span class="nn">com.pontotel.bateponto.sdk.BatePontoSdk</span>
+
+<span class="c1">// Dentro da Activity do hospedeiro.</span>
+<span class="n">abrirBatePontoButton</span><span class="p">.</span><span class="na">setOnClickListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">BatePontoSdk</span><span class="p">.</span><span class="na">open</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><p>Use uma <strong>Activity válida na thread principal</strong>. O manifesto do SDK já fornece sua Activity; não é necessário declará-la novamente nem alterar sua <code>Application</code>. Veja a <a href="index.html#integracao-android">chamada Java</a> se necessário. <strong>Android nativo: prossiga para “Compile e valide”.</strong></p>
+<h3>Flutter · registre o canal Kotlin</h3>
+<p>Em <code>android/app/src/main/kotlin/.../MainActivity.kt</code>, adapte o pacote e incorpore o canal à Activity existente. Preserve seus outros canais, plugins e comportamento. Exemplo mínimo:</p>
+<div class="code-block"><div class="code-toolbar"><span>Kotlin</span><button class="copy-button" aria-label="Copiar código 6" type="button">Copiar</button></div><pre><code><span class="k">package</span><span class="w"> </span><span class="nn">com.exemplo.meuapp</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.pontotel.bateponto.sdk.BatePontoSdk</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.flutter.embedding.android.FlutterActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.flutter.embedding.engine.FlutterEngine</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.flutter.plugin.common.MethodChannel</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">MainActivity</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">FlutterActivity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">configureFlutterEngine</span><span class="p">(</span><span class="n">flutterEngine</span><span class="p">:</span><span class="w"> </span><span class="n">FlutterEngine</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">.</span><span class="na">configureFlutterEngine</span><span class="p">(</span><span class="n">flutterEngine</span><span class="p">)</span>
+<span class="w">        </span><span class="n">MethodChannel</span><span class="p">(</span>
+<span class="w">            </span><span class="n">flutterEngine</span><span class="p">.</span><span class="na">dartExecutor</span><span class="p">.</span><span class="na">binaryMessenger</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"com.pontotel.bateponto/sdk"</span>
+<span class="w">        </span><span class="p">).</span><span class="na">setMethodCallHandler</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">call</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">call</span><span class="p">.</span><span class="na">method</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">"open"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">result</span><span class="p">.</span><span class="na">notImplemented</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">BatePontoSdk</span><span class="p">.</span><span class="na">open</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">result</span><span class="p">.</span><span class="na">success</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="p">:</span><span class="w"> </span><span class="n">Exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">result</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">"OPEN_FAILED"</span><span class="p">,</span>
+<span class="w">                        </span><span class="s">"Não foi possível abrir o BatePonto."</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p><code>OPEN_FAILED</code> trata uma exceção síncrona da solicitação de abertura; não captura falhas posteriores dentro do SDK. Continue no Dart na próxima página.</p>
+</section><section class="quick-page" id="passo-4" aria-labelledby="titulo-4"><div class="page-meta"><strong>BatePonto / Guia rápido</strong><span>Android · 0.1.0-local · 04 / 05</span></div><h2 id="titulo-4">Conecte o botão Flutter</h2>
+<h3>Encaminhe a ação pelo MethodChannel</h3>
+<p>Exemplo de tela mínima em Dart. Use este botão em uma tela com <code>Scaffold</code>; em aplicativos existentes, preserve os controles e o tratamento de estado da sua interface.</p>
+<div class="code-block"><div class="code-toolbar"><span>Dart</span><button class="copy-button" aria-label="Copiar código 7" type="button">Copiar</button></div><pre><code><span class="k">import</span><span class="w"> </span><span class="s1">'package:flutter/foundation.dart'</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s1">'package:flutter/services.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">BatePontoEntry</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">StatelessWidget</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">BatePontoEntry</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">_channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MethodChannel</span><span class="p">(</span><span class="s1">'com.pontotel.bateponto/sdk'</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_open</span><span class="p">(</span><span class="n">BuildContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="kd">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">String</span><span class="o">?</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">await</span><span class="w"> </span><span class="n">_channel</span><span class="p">.</span><span class="n">invokeMethod</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">'open'</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="kd">on</span><span class="w"> </span><span class="n">PlatformException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Não foi possível abrir o BatePonto.'</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="kd">on</span><span class="w"> </span><span class="n">MissingPluginException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'A ponte Android do BatePonto não está disponível.'</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">mounted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">ScaffoldMessenger</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">showSnackBar</span><span class="p">(</span>
+<span class="w">        </span><span class="n">SnackBar</span><span class="p">(</span><span class="nl">content:</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="n">message</span><span class="p">)),</span>
+<span class="w">      </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nd">@override</span>
+<span class="w">  </span><span class="n">Widget</span><span class="w"> </span><span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">supported</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">kIsWeb</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">        </span><span class="n">defaultTargetPlatform</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TargetPlatform</span><span class="p">.</span><span class="n">android</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FilledButton</span><span class="p">(</span>
+<span class="w">      </span><span class="nl">onPressed:</span><span class="w"> </span><span class="n">supported</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">_open</span><span class="p">(</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nl">child:</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s1">'Abrir BatePonto'</span><span class="p">),</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>Insira <code>const BatePontoEntry()</code> no corpo de uma tela. O canal <code>com.pontotel.bateponto/sdk</code> e o método <code>open</code> devem coincidir exatamente com a ponte Kotlin. Não há pacote BatePonto a adicionar ao <code>pubspec.yaml</code>.</p>
+<p><strong>Para um botão com estado “Abrindo…” e bloqueio enquanto a solicitação está pendente</strong>, use o <a href="exemplos/bateponto_button.dart">componente completo</a>, também explicado na <a href="index.html#integracao-flutter">referência Flutter</a>.</p>
+<h3>Entenda o retorno da chamada</h3>
+<p>O <code>await</code> termina quando a ponte responde à <strong>solicitação de abertura</strong>. Ele não espera o usuário sair do BatePonto e não confirma login ou marcação. Esta versão não oferece callbacks de negócio, SSO nem API pública de logout.</p>
+<p>Depois de alterar Kotlin ou dependências Android, faça um <strong>build completo e reinstale o aplicativo</strong>. Hot reload não incorpora essas mudanças.</p>
+</section><section class="quick-page" id="passo-5" aria-labelledby="titulo-5"><div class="page-meta"><strong>BatePonto / Guia rápido</strong><span>Android · 0.1.0-local · 05 / 05</span></div><h2 id="titulo-5">Compile e valide</h2>
+<h3>Gere o aplicativo hospedeiro</h3>
+<p><strong>Android nativo</strong>, a partir de <code>meu-app-android/</code>:</p>
+<div class="code-block"><div class="code-toolbar"><span>Terminal</span><button class="copy-button" aria-label="Copiar código 8" type="button">Copiar</button></div><pre><code>./gradlew<span class="w"> </span>:app:assembleDebug
+</code></pre></div><p><strong>Flutter</strong>, a partir de <code>meu-app-flutter/</code>:</p>
+<div class="code-block"><div class="code-toolbar"><span>Terminal</span><button class="copy-button" aria-label="Copiar código 9" type="button">Copiar</button></div><pre><code>flutter<span class="w"> </span>pub<span class="w"> </span>get
+flutter<span class="w"> </span>build<span class="w"> </span>apk<span class="w"> </span>--debug<span class="w"> </span>--target-platform<span class="w"> </span>android-arm64
+</code></pre></div><p>Instale o APK em um dispositivo ou emulador <strong>ARM64</strong>. O SDK usa o bundle embarcado; não precisa de Metro. O backend continua sendo o ambiente configurado na distribuição: build local não significa servidor local. Confirme o ambiente recebido antes de inserir dados.</p>
+<h3>Checklist da primeira integração</h3>
+<ol>
+<li>Toque no botão e confira a abertura do BatePonto em tela cheia.</li>
+<li>Verifique as permissões necessárias e o comportamento ao negar acesso.</li>
+<li>Abra e cancele a câmera; confirme que o SDK continua funcionando.</li>
+<li>Use Voltar até a raiz e saia; confira o retorno ao hospedeiro.</li>
+<li>Reabra o SDK; confira a sessão e a navegação. <strong>Fechar não faz logout.</strong></li>
+<li>Valide também o build release com assinatura, minificação e integrações reais do seu app.</li>
+</ol>
+<p>O login acontece dentro do BatePonto. Homologue login, marcação e reconhecimento facial em aparelhos reais antes de distribuir. O motor Luxand está incluído; a validação desta entrega não comprova biometria completa nem marcação real.</p>
+<h3>Se algo impedir o primeiro teste</h3>
+<table>
+<thead>
+<tr>
+<th>Sintoma</th>
+<th>Primeiro passo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dependência não encontrada</td>
+<td>Confira caminho, Maven inteiro e repositórios públicos.</td>
+</tr>
+<tr>
+<td><code>MissingPluginException</code></td>
+<td>Confira canal/método e recompile/reinstale o app Flutter.</td>
+</tr>
+<tr>
+<td>Erro nativo ou ABI incompatível</td>
+<td>Use ARM64 e confira filtros e splits do hospedeiro.</td>
+</tr>
+</tbody>
+</table>
+<h3>Consulte quando precisar</h3>
+<p>No pacote de documentação, abra <code>index.html</code> para a <strong>referência completa</strong>, com busca local, API, permissões, dados, atualização e diagnóstico. Os links abaixo funcionam mantendo os arquivos na mesma pasta:</p>
+<p><a href="index.html#referencia-da-api">API e ciclo de vida</a> · <a href="index.html#permissoes-e-manifesto">Manifesto e Firebase</a> · <a href="index.html#solucao-de-problemas">Solução de problemas</a> · <a href="index.html#seguranca-e-responsabilidades">Segurança</a> · <a href="BatePonto-SDK-Guia-do-Integrador.pdf">Referência em PDF</a></p>
+<p>O SDK compartilha processo e pacote com o hospedeiro; não oferece isolamento de segurança.</p>
+</section></main><footer>Prévia de integração · Revisão 17/09/2026 · <a href="GUIA-RAPIDO.md" download>Versão Markdown</a></footer><div class="status" role="status" aria-live="polite"></div><script>document.documentElement.classList.add('js-ready');
+document.querySelectorAll('.copy-button').forEach(button => button.addEventListener('click', async () => {
+  const text = button.closest('.code-block').querySelector('code').textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    button.textContent = 'Copiado';
+    setTimeout(() => button.textContent = 'Copiar', 1600);
+  } catch (_) {
+    document.querySelector('[role="status"]').textContent = 'Selecione o código e copie pelo teclado.';
+  }
+}));</script></body></html>

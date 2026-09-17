@@ -1,0 +1,11 @@
+integracao/
+├── bateponto-sdk/
+│   └── maven/
+├── meu-app-android/
+│   ├── settings.gradle.kts
+│   └── app/build.gradle.kts
+└── meu-app-flutter/
+    ├── lib/
+    └── android/
+        ├── settings.gradle.kts
+        └── app/build.gradle.kts
