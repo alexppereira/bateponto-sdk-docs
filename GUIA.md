@@ -26,7 +26,7 @@ O módulo executa **no mesmo processo e pacote Android** do hospedeiro. Uma Acti
 
 <a id="demonstracao-integracao"></a>
 
-![Demonstração do BatePonto integrado ao aplicativo nativo, com dados pessoais e do empregador ocultados.](assets/demonstracao-integracao.gif "Demonstração da integração no aplicativo nativo. Reprodução em 2×; dados pessoais e do empregador ocultados.")
+![Demonstração do BatePonto integrado ao aplicativo nativo, com dados fictícios de teste.](assets/demonstracao-integracao.gif "Demonstração da integração no aplicativo nativo. Reprodução em 1,5× com dados fictícios de teste.")
 
 ### Escolha seu caminho
 
