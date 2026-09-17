@@ -24,6 +24,10 @@ O mesmo SDK foi integrado a um aplicativo Kotlin nativo e ao LocalSend, desenvol
 
 O módulo executa **no mesmo processo e pacote Android** do hospedeiro. Uma Activity própria organiza a interface e o ciclo de vida; ela não cria uma fronteira de segurança entre aplicativos.
 
+<a id="demonstracao-integracao"></a>
+
+![Demonstração do BatePonto integrado ao aplicativo nativo, com dados pessoais e do empregador ocultados.](assets/demonstracao-integracao.gif "Demonstração da integração no aplicativo nativo. Reprodução em 2×; dados pessoais e do empregador ocultados.")
+
 ### Escolha seu caminho
 
 - **Android Kotlin ou Java:** configure a dependência e chame `BatePontoSdk.open(Activity)`. Siga [Integração Android](#integracao-android).

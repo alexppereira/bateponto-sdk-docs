@@ -10,6 +10,7 @@ index.html é a referência completa, com busca e cópia de código, offline.
 BatePonto-SDK-Guia-do-Integrador.pdf é a referência completa em PDF.
 GUIA.md contém essa referência em Markdown.
 A pasta exemplos contém trechos de referência, não aplicativos completos.
+A pasta assets contém a demonstração em GIF exibida na referência HTML.
 Mantenha os arquivos juntos para usar os links entre os documentos.
 
 Versão: 0.1.0-local — revisão de 17/09/2026.
