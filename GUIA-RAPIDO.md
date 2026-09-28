@@ -1,6 +1,6 @@
 # BatePonto SDK · Guia rápido
 
-Android · 0.1.0-local · Prévia de integração · 17 de setembro de 2026
+Android · 0.1.0 · Prévia de integração · 28 de setembro de 2026
 
 ## Prepare a integração
 
@@ -25,7 +25,12 @@ Hospedeiro com **React Native** requer adaptação; integração direta não sup
 
 ### Organize os arquivos
 
-Extraia `bateponto-sdk-android-local.zip` para obter a estrutura abaixo. Preserve a pasta **Maven inteira**, incluindo dependências, `.pom` e `.module`; apenas o AAR principal não basta.
+Extraia `bateponto-sdk-android.zip` para obter a estrutura abaixo. Preserve a pasta **Maven inteira**, incluindo dependências, `.pom` e `.module`; apenas o AAR principal não basta.
+
+```sh
+mkdir -p integracao/bateponto-sdk
+unzip /caminho/para/bateponto-sdk-android.zip -d integracao/bateponto-sdk
+```
 
 ```text
 integracao/
@@ -66,7 +71,7 @@ dependencyResolutionManagement {
 Em `app/build.gradle.kts` — `android/app/build.gradle.kts` no Flutter — adicione ao bloco `dependencies`:
 
 ```kotlin
-implementation("com.pontotel.bateponto:sdk:0.1.0-local")
+implementation("com.pontotel.bateponto:sdk:0.1.0")
 ```
 
 ### 2. Ajuste Android, Java e Kotlin
@@ -234,6 +239,8 @@ Instale o APK em um dispositivo ou emulador **ARM64**. O SDK usa o bundle embarc
 
 O login acontece dentro do BatePonto. Homologue login, marcação e reconhecimento facial em aparelhos reais antes de distribuir. O motor Luxand está incluído; a validação desta entrega não comprova biometria completa nem marcação real.
 
+Nesta geração, Bifrost fornece a configuração de Luxand e logs quando as chaves e o token do usuário estão disponíveis. Até o cadastro das chaves, o módulo usa a contingência local, também usada na primeira abertura offline. O app Flutter não precisa configurar Bifrost nem fornecer chaves. A geração com Bifrost passou nos builds e auditorias, mas ainda não foi executada em dispositivo.
+
 ### Se algo impedir o primeiro teste
 
 | Sintoma | Primeiro passo |
@@ -242,10 +249,6 @@ O login acontece dentro do BatePonto. Homologue login, marcação e reconhecimen
 | `MissingPluginException` | Confira canal/método e recompile/reinstale o app Flutter. |
 | Erro nativo ou ABI incompatível | Use ARM64 e confira filtros e splits do hospedeiro. |
 
-### Consulte quando precisar
+### Consulte a referência completa
 
-No pacote de documentação, abra `index.html` para a **referência completa**, com busca local, API, permissões, dados, atualização e diagnóstico. Os links abaixo funcionam mantendo os arquivos na mesma pasta:
-
-[API e ciclo de vida](index.html#referencia-da-api) · [Manifesto e Firebase](index.html#permissoes-e-manifesto) · [Solução de problemas](index.html#solucao-de-problemas) · [Segurança](index.html#seguranca-e-responsabilidades) · [Referência em PDF](BatePonto-SDK-Guia-do-Integrador.pdf)
-
-O SDK compartilha processo e pacote com o hospedeiro; não oferece isolamento de segurança.
+Abra o [guia do integrador](index.html) ou o [PDF](BatePonto-SDK-Guia-do-Integrador.pdf) para API, manifesto, diagnóstico e segurança. O SDK compartilha processo e pacote com o hospedeiro.

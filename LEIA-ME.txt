@@ -13,8 +13,8 @@ A pasta exemplos contém trechos de referência, não aplicativos completos.
 A pasta assets contém a demonstração em GIF exibida na referência HTML.
 Mantenha os arquivos juntos para usar os links entre os documentos.
 
-Versão: 0.1.0-local — revisão de 17/09/2026.
+Versão: 0.1.0 — revisão de 28/09/2026.
 Este pacote contém apenas documentação. O SDK binário é fornecido separadamente
-no arquivo bateponto-sdk-android-local.zip.
+no arquivo bateponto-sdk-android.zip.
 Consulte requisitos, limites e a configuração de Firebase antes de integrar.
 Não é necessário publicar este portal para utilizá-lo.

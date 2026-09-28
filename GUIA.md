@@ -2,7 +2,7 @@
 
 Integre a experiência do BatePonto ao seu aplicativo, com login, telas e navegação conduzidos pelo próprio módulo.
 
-**Guia do integrador · versão 0.1.0-local · 17 de setembro de 2026**
+**Guia do integrador · versão 0.1.0 · 28 de setembro de 2026**
 
 <a id="visao-geral"></a>
 
@@ -13,7 +13,7 @@ O BatePonto SDK é uma distribuição Android binária. Seu aplicativo oferece u
 O mesmo SDK foi integrado a um aplicativo Kotlin nativo e ao LocalSend, desenvolvido em Flutter. O login acontece dentro do BatePonto. A integração não exige Node, Metro ou os fontes React Native do BatePonto no projeto consumidor.
 
 > **Sobre esta versão**
-> Esta é uma prévia de integração Android ARM64, distribuída como `0.1.0-local`. Os exemplos comprovam integração em Kotlin e Flutter; não representam homologação de todos os aplicativos, dispositivos ou fluxos. Revise [Requisitos e compatibilidade](#requisitos-e-compatibilidade) antes de começar.
+> Esta é uma prévia de integração Android ARM64, distribuída como `0.1.0`. Os exemplos comprovam integração em Kotlin e Flutter; não representam homologação de todos os aplicativos, dispositivos ou fluxos. Revise [Requisitos e compatibilidade](#requisitos-e-compatibilidade) antes de começar.
 
 ### A experiência do usuário
 
@@ -77,17 +77,18 @@ O runtime embarcado utiliza Expo 55, React Native 0.83.6 e Hermes 0.14.1. Essa i
 
 ## O pacote que você recebe
 
-A distribuição do SDK é o arquivo `bateponto-sdk-android-local.zip`. Extraia seu conteúdo e mantenha a pasta `maven` inteira:
+A distribuição do SDK é o arquivo `bateponto-sdk-android.zip`. Extraia seu conteúdo e mantenha a pasta `maven` inteira:
 
 ```text
 bateponto-sdk/
 ├── SDK-LEIA-ME.md
+├── build-info.json
 └── maven/
-    ├── com/pontotel/bateponto/sdk/0.1.0-local/
+    ├── com/pontotel/bateponto/sdk/0.1.0/
     └── ... dependências e metadados dos demais módulos
 ```
 
-A pasta Maven contém o AAR principal, AARs transitivos e metadados de resolução. **Copiar apenas `sdk-0.1.0-local.aar` para `libs/` não instala o SDK completo.** Não remova arquivos `.pom`, `.module` ou restrinja o repositório somente ao grupo `com.pontotel.bateponto`.
+A pasta Maven contém o AAR principal, AARs transitivos e metadados de resolução. **Copiar apenas `sdk-0.1.0.aar` para `libs/` não instala o SDK completo.** Não remova arquivos `.pom`, `.module` ou restrinja o repositório somente ao grupo `com.pontotel.bateponto`.
 
 Dependências públicas adicionais são resolvidas pelo Google Maven e Maven Central. Uma máquina sem cache precisa acessar esses repositórios durante o build. O uso de `--offline` depende de um cache previamente preenchido.
 
@@ -110,6 +111,15 @@ integracao/
 ```
 
 Nos exemplos nativos, o Maven fica em `../bateponto-sdk/maven`, relativo à raiz Gradle. Em Flutter, a raiz Gradle fica em `android/`, portanto o caminho é `../../bateponto-sdk/maven`. Ajuste o caminho se organizar as pastas de outra forma.
+
+Para reproduzir essa estrutura a partir do ZIP recebido, coloque o aplicativo Flutter em `integracao/meu-app-flutter/` e extraia o SDK assim:
+
+```sh
+mkdir -p integracao/bateponto-sdk
+unzip /caminho/para/bateponto-sdk-android.zip -d integracao/bateponto-sdk
+```
+
+Confira a versão real em `integracao/bateponto-sdk/build-info.json` e a existência de `integracao/bateponto-sdk/maven/com/pontotel/bateponto/sdk/0.1.0/` antes do build. O ZIP não precisa entrar no repositório de código do aplicativo.
 
 <a id="integracao-android"></a>
 
@@ -149,7 +159,7 @@ Em `meu-app-android/app/build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.pontotel.bateponto:sdk:0.1.0-local")
+    implementation("com.pontotel.bateponto:sdk:0.1.0")
 }
 ```
 
@@ -157,7 +167,7 @@ Em Groovy (`app/build.gradle`):
 
 ```groovy
 dependencies {
-    implementation 'com.pontotel.bateponto:sdk:0.1.0-local'
+    implementation 'com.pontotel.bateponto:sdk:0.1.0'
 }
 ```
 
@@ -249,7 +259,7 @@ O Flutter chama uma ponte Kotlin no projeto Android. Essa ponte invoca a mesma A
 
 ### 1. Configure o módulo Android
 
-Adicione a dependência `com.pontotel.bateponto:sdk:0.1.0-local` a `android/app/build.gradle.kts` ou `android/app/build.gradle`, conforme a linguagem usada no seu projeto. Use a configuração Android/JVM da [integração Android](#integracao-android).
+Adicione a dependência `com.pontotel.bateponto:sdk:0.1.0` a `android/app/build.gradle.kts` ou `android/app/build.gradle`, conforme a linguagem usada no seu projeto. Use a configuração Android/JVM da [integração Android](#integracao-android).
 
 Se os repositórios são centralizados em `android/settings.gradle.kts`, use:
 
@@ -274,6 +284,8 @@ allprojects {
     }
 }
 ```
+
+Na demo Flutter independente, o ZIP é extraído em `sdk/maven` dentro do próprio projeto. Nesse layout, `android/build.gradle` usa `maven { url = rootProject.uri("../sdk/maven") }`, e `android/gradle.properties` fixa `batepontoSdkVersion=0.1.0`. O caminho Maven depende de onde você extraiu o ZIP.
 
 Escolha o local compatível com a política de repositórios do projeto; não duplique configurações se usar `FAIL_ON_PROJECT_REPOS`. Preserve `includeBuild` do Flutter, o carregador de plugins e os demais canais já existentes na Activity.
 
@@ -466,6 +478,8 @@ O login é feito pelo usuário nas telas do BatePonto. O aplicativo hospedeiro n
 
 O ambiente dos serviços vem configurado nos binários fornecidos. Não existe parâmetro público para trocar endpoints ou ambiente em runtime. Confirme com a equipe responsável pelo BatePonto qual ambiente está associado ao pacote recebido antes de fazer testes com dados reais.
 
+Na geração de 28/09/2026, o módulo consulta o Bifrost após obter o token do usuário para a licença Luxand e a autorização dos logs. Enquanto as chaves ainda não estiverem cadastradas, a versão usa os valores locais de contingência; a mesma contingência cobre a primeira abertura offline. O hospedeiro Flutter não precisa configurar Bifrost, passar token pelo canal ou incluir chaves no projeto. A senha do banco local permanece no módulo. O uso das chaves remotas ainda não foi validado com o cadastro real.
+
 A sessão e o banco do módulo ficam no armazenamento privado do aplicativo hospedeiro. Fechar e reabrir a tela não apaga esses dados. As regras Android e a configuração do seu app governam backup, limpeza de dados e desinstalação; revise essas políticas para os dados tratados pela integração.
 
 O BatePonto inclui recursos de dados locais e sincronização, mas esta entrega não homologou o fluxo completo offline em todos os cenários. Instalação do SDK e autenticação não equivalem a validar marcação, fila offline ou envio de mídias.
@@ -493,9 +507,9 @@ Faça a validação na variante e nos dispositivos que seu produto pretende dist
 
 ### O que foi comprovado no pacote de referência
 
-Nos dois exemplos release, foram demonstrados abertura, login, retorno e reabertura em emulador Android API 36 ARM64/4 KB. A correção mais recente manteve a câmera sintética ativa por 38 segundos monitorados, seguida de duas reaberturas por hospedeiro, sem crash ou reinício do processo.
+Na validação anterior, em 17/09/2026, os dois exemplos release demonstraram abertura, login, retorno e reabertura em emulador Android API 36 ARM64/4 KB. A correção de câmera daquela geração manteve a câmera sintética ativa por 38 segundos monitorados, seguida de duas reaberturas por hospedeiro, sem crash ou reinício do processo.
 
-A ativação e a inicialização da Luxand foram verificadas em instrumentação local. Isso não comprova biometria completa em aparelho físico. Não foi registrada marcação de ponto nessa validação; páginas de 16 KB, outras ABIs, outros Androids e todos os fluxos de permissões permanecem fora dessa evidência.
+A geração de 28/09/2026, com Bifrost, passou no build do SDK e dos dois hospedeiros, nas auditorias de artefatos e nos checksums. Essa geração não foi instalada ou executada em dispositivo; a consulta a chaves reais do Bifrost ainda depende do cadastro no backend. A ativação e a inicialização da Luxand foram verificadas na instrumentação da geração anterior. Isso não comprova biometria completa em aparelho físico. Não foi registrada marcação de ponto nessa validação; páginas de 16 KB, outras ABIs, outros Androids e todos os fluxos de permissões permanecem fora dessa evidência.
 
 ### Diagnóstico local básico
 
@@ -522,7 +536,7 @@ Esta versão executa o bundle embarcado no aplicativo. Atualizações OTA do Bat
 3. Atualize o caminho do repositório e a coordenada Gradle quando a versão mudar.
 4. Recompile, execute a validação de integração e confirme que o APK instalado é o novo.
 
-Durante esta prévia, mais de uma revisão local pode usar `0.1.0-local`. Para substituir arquivos sob a mesma coordenada, peça ao Gradle que reavalie as dependências:
+Durante esta prévia, mais de uma revisão local pode usar `0.1.0`. Para substituir arquivos sob a mesma coordenada, peça ao Gradle que reavalie as dependências:
 
 ```sh
 # Na raiz Gradle do app Android, ou na pasta android/ do Flutter:
@@ -617,4 +631,4 @@ Essas referências explicam os mecanismos das plataformas. O contrato e os limit
 
 ### Identificação deste documento
 
-**Produto:** BatePonto SDK Android. **Distribuição:** `0.1.0-local`. **Revisão:** 17/09/2026, incluindo a correção de câmera. **Público:** desenvolvedores do aplicativo hospedeiro e equipes de integração. Este guia não anuncia disponibilidade de SDK iOS, suporte universal ou aprovação para produção.
+**Produto:** BatePonto SDK Android. **Distribuição:** `0.1.0`. **Revisão:** 28/09/2026, incluindo a correção de câmera e o fallback de configuração Bifrost. **Público:** desenvolvedores do aplicativo hospedeiro e equipes de integração. Este guia não anuncia disponibilidade de SDK iOS, suporte universal ou aprovação para produção.
