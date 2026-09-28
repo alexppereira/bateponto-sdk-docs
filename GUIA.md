@@ -8,7 +8,7 @@ Integre a experiência do BatePonto ao seu aplicativo, com login, telas e navega
 
 ## Visão geral
 
-O BatePonto SDK é uma distribuição Android binária. Seu aplicativo oferece um ponto de entrada — por exemplo, um botão **Abrir BatePonto** — e o SDK abre uma Activity em tela cheia dentro do mesmo aplicativo. Ao sair pela navegação do BatePonto, o usuário retorna à tela do hospedeiro.
+O BatePonto SDK é uma distribuição Android binária. Seu aplicativo oferece um ponto de entrada - por exemplo, um botão **Abrir BatePonto** - e o SDK abre uma Activity em tela cheia dentro do mesmo aplicativo. Ao sair pela navegação do BatePonto, o usuário retorna à tela do hospedeiro.
 
 O mesmo SDK foi integrado a um aplicativo Kotlin nativo e ao LocalSend, desenvolvido em Flutter. O login acontece dentro do BatePonto. A integração não exige Node, Metro ou os fontes React Native do BatePonto no projeto consumidor.
 
@@ -44,7 +44,7 @@ Os valores abaixo descrevem a configuração usada nos exemplos. Preserve o iden
 | --- | --- |
 | Plataforma | Android |
 | Arquitetura incluída | `arm64-v8a` |
-| `minSdk` dos exemplos | 26 — Android 8.0 |
+| `minSdk` dos exemplos | 26 - Android 8.0 |
 | `compileSdk` / `targetSdk` dos exemplos | 36 / 36 |
 | Java e alvo JVM | 17 |
 | Android Gradle Plugin | 8.12.0 |

@@ -1,4 +1,4 @@
-BatePonto SDK Android — documentação do integrador
+BatePonto SDK Android - documentação do integrador
 
 COMECE AQUI
 Abra guia-rapido.html no navegador ou BatePonto-SDK-Guia-Rapido.pdf.
@@ -13,7 +13,7 @@ A pasta exemplos contém trechos de referência, não aplicativos completos.
 A pasta assets contém a demonstração em GIF exibida na referência HTML.
 Mantenha os arquivos juntos para usar os links entre os documentos.
 
-Versão: 0.1.0 — revisão de 28/09/2026.
+Versão: 0.1.0 - revisão de 28/09/2026.
 Este pacote contém apenas documentação. O SDK binário é fornecido separadamente
 no arquivo bateponto-sdk-android.zip.
 Consulte requisitos, limites e a configuração de Firebase antes de integrar.

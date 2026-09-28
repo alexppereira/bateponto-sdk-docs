@@ -54,7 +54,7 @@ Passos comuns às duas trilhas. Os trechos usam **Kotlin DSL**: incorpore-os aos
 
 ### 1. Registre o Maven e a dependência
 
-Em `settings.gradle.kts` — dentro de `android/` no Flutter — adicione o Maven antes dos repositórios públicos:
+Em `settings.gradle.kts` - dentro de `android/` no Flutter - adicione o Maven antes dos repositórios públicos:
 
 ```kotlin
 dependencyResolutionManagement {
@@ -68,7 +68,7 @@ dependencyResolutionManagement {
 
 **No Flutter**, troque o caminho por `../../bateponto-sdk/maven`. Para Groovy (`.gradle`) ou repositórios em `allprojects`, consulte a trilha [Android nativo](index.html#integracao-android) ou [Flutter](index.html#integracao-flutter). Preserve `pluginManagement` e o carregador Flutter; não duplique políticas de repositório.
 
-Em `app/build.gradle.kts` — `android/app/build.gradle.kts` no Flutter — adicione ao bloco `dependencies`:
+Em `app/build.gradle.kts` - `android/app/build.gradle.kts` no Flutter - adicione ao bloco `dependencies`:
 
 ```kotlin
 implementation("com.pontotel.bateponto:sdk:0.1.0")
