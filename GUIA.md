@@ -424,7 +424,7 @@ com.pontotel.bateponto.sdk.BatePontoSdk.open(activity)
 | Autenticação | Conduzida nas telas do BatePonto |
 | Resultado de negócio | Não retornado por esta API |
 
-O método não recebe senha, token, ambiente, identidade de funcionário nem dados de marcação. Não há APIs públicas de `configure`, `close`, `logout`, consulta de ponto ou resultado de marcação nesta versão. Para receber o contexto de identidade, use o ouvinte público descrito a seguir. Não utilize classes internas do SDK como contrato de integração.
+Não há APIs públicas de `configure`, `close`, `logout`, consulta de ponto ou resultado de marcação nesta versão. Para receber o contexto de identidade, use o ouvinte público descrito a seguir. Não utilize classes internas do SDK como contrato de integração.
 
 Uma resposta bem-sucedida da ponte Flutter significa que a solicitação foi encaminhada. Não representa confirmação de tela pronta, autenticação ou registro de ponto. Eventos de ciclo de vida do hospedeiro também não devem ser interpretados como esses resultados.
 
@@ -432,7 +432,7 @@ Uma resposta bem-sucedida da ponte Flutter significa que a solicitação foi enc
 
 ### Contexto compartilhado com o hospedeiro
 
-O SDK informa ao aplicativo hospedeiro um retrato do **usuário**, da **empresa** e do **coletor** da sessão do BatePonto. Cada campo `user`, `company` e `collector` pode ser `null`. Quando presente, contém `id: String` e `name: String?`; o nome da empresa pode estar ausente. O SDK não envia senha, token, CPF, e-mail, foto ou biometria por esse contrato.
+O SDK informa ao aplicativo hospedeiro um retrato do **usuário**, da **empresa** e do **coletor** da sessão do BatePonto. Cada campo `user`, `company` e `collector` pode ser `null`. Quando presente, contém `id: String` e `name: String?`; o nome da empresa pode estar ausente.
 
 No Android, registre o ouvinte antes de abrir o BatePonto e feche a assinatura quando a tela hospedeira deixar de usá-la. Exemplo em Kotlin:
 
@@ -452,7 +452,7 @@ BatePontoSdk.open(this)
 
 O callback roda na thread principal. Após a hidratação da sessão, o ouvinte recebe o estado atual e novos estados quando usuário ou coletor mudam. No logout, as identidades são enviadas como `null`; retornar ao hospedeiro sem logout não apaga a sessão. O ID do coletor é o identificador remoto, não a chave local do banco. Um coletor no contexto indica configuração local, não aprovação no backend.
 
-No Flutter para Android, mantenha a chamada `open` no `MethodChannel` e encaminhe o mesmo contexto por um `EventChannel` chamado `com.pontotel.bateponto/context`. O adaptador Android deve registrar `BatePontoSdk.addContextListener`, envia um mapa com `user`, `company` e `collector` (cada identidade com `id` e `name`) e fecha a assinatura em `onCancel` e na limpeza do engine. Em Dart, assine `receiveBroadcastStream()` e cancele a `StreamSubscription` ao descartar a tela. Não registre ou envie esses dados a serviços do hospedeiro sem a autorização e proteção adequadas.
+No Flutter para Android, mantenha a chamada `open` no `MethodChannel` e encaminhe o mesmo contexto por um `EventChannel` chamado `com.pontotel.bateponto/context`. O adaptador Android deve registrar `BatePontoSdk.addContextListener`, enviar um mapa com `user`, `company` e `collector` (cada identidade com `id` e `name`) e fechar a assinatura em `onCancel` e na limpeza do engine. Em Dart, assine `receiveBroadcastStream()` e cancele a `StreamSubscription` ao descartar a tela.
 
 Esse contexto ajuda a exibir a identidade vinculada ao BatePonto. **Não é um callback de autenticação, de marcação de ponto nem de autorização do backend do hospedeiro.** Se seu aplicativo depende desses resultados, valide-os por seus próprios serviços e pelo contrato acordado para esses fluxos.
 
