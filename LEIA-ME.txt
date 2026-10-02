@@ -9,11 +9,14 @@ CONSULTE QUANDO PRECISAR
 index.html é a referência completa, com busca e cópia de código, offline.
 BatePonto-SDK-Guia-do-Integrador.pdf é a referência completa em PDF.
 GUIA.md contém essa referência em Markdown.
-A pasta exemplos contém trechos de referência, não aplicativos completos.
+A pasta exemplos contém trechos históricos da revisão 0.1.0, não aplicativos completos;
+use os exemplos atualizados nos guias para a versão 0.2.2.
 A pasta assets contém a demonstração em GIF exibida na referência HTML.
 Mantenha os arquivos juntos para usar os links entre os documentos.
 
-Versão: 0.1.0 - revisão de 28/09/2026.
+Versão: 0.2.2 - revisão de 02/10/2026.
+O SDK compartilha com o hospedeiro o contexto de usuário, empresa e coletor;
+consulte a seção "Contexto compartilhado" do guia completo.
 Este pacote contém apenas documentação. O SDK binário é fornecido separadamente
 no arquivo bateponto-sdk-android.zip.
 Consulte requisitos, limites e a configuração de Firebase antes de integrar.

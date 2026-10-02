@@ -1,6 +1,6 @@
 # Exemplos do guia
 
-Trechos extraídos automaticamente do guia. Não são projetos completos. Preserve a configuração do hospedeiro e siga as instruções do guia para adaptar pacotes, caminhos e controles existentes.
+Arquivo histórico com trechos da revisão 0.1.0. Não são projetos completos nem representam o contrato de contexto da versão 0.2.2. Para a integração atual, siga [o guia completo](GUIA.md#contexto-compartilhado), inclusive a assinatura de usuário, empresa e coletor, e adapte pacotes, caminhos e controles existentes.
 
 - [01-exemplo.txt](exemplos/01-exemplo.txt) - text
 - [02-exemplo.txt](exemplos/02-exemplo.txt) - text

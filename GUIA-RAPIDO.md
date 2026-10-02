@@ -1,6 +1,6 @@
 # BatePonto SDK · Guia rápido
 
-Android · 0.1.0 · Prévia de integração · 28 de setembro de 2026
+Android · 0.2.2 · Prévia de integração · 2 de outubro de 2026
 
 ## Prepare a integração
 
@@ -19,7 +19,7 @@ Use um aplicativo Android ou Flutter que já compile. Esta é a configuração d
 | Gradle | Nativo: 9.0.0 · Flutter: 8.13 |
 | Flutter / Dart | 3.24.5 / 3.5.4 no exemplo Flutter |
 
-**Limites desta prévia:** execução exercitada em emulador API 36 ARM64 com páginas de 4 KB. Outras versões, aparelhos físicos e páginas de 16 KB precisam de homologação. O SDK declara mínimo API 24; os exemplos usam 26. Nenhum desses mínimos comprova toda a matriz Android.
+**Limites desta prévia:** a versão 0.2.2 foi exercitada em emulador Android API 34 ARM64. Outras versões, aparelhos físicos e páginas de 16 KB precisam de homologação. O SDK declara mínimo API 24; os exemplos usam 26. Nenhum desses mínimos comprova toda a matriz Android.
 
 Hospedeiro com **React Native** requer adaptação; integração direta não suportada. **Firebase próprio** exige análise de coexistência antes de integrar. Push do BatePonto está desativado. iOS, x86 e ARM de 32 bits não estão incluídos.
 
@@ -71,7 +71,7 @@ dependencyResolutionManagement {
 Em `app/build.gradle.kts` - `android/app/build.gradle.kts` no Flutter - adicione ao bloco `dependencies`:
 
 ```kotlin
-implementation("com.pontotel.bateponto:sdk:0.1.0")
+implementation("com.pontotel.bateponto:sdk:0.2.2")
 ```
 
 ### 2. Ajuste Android, Java e Kotlin
@@ -160,7 +160,7 @@ class MainActivity : FlutterActivity() {
 
 ### Encaminhe a ação pelo MethodChannel
 
-Exemplo de tela mínima em Dart. Use este botão em uma tela com `Scaffold`; em aplicativos existentes, preserve os controles e o tratamento de estado da sua interface.
+Exemplo em Dart para uma tela com `Scaffold`; adapte os controles ao seu aplicativo.
 
 ```dart
 import 'package:flutter/foundation.dart';
@@ -199,15 +199,15 @@ class BatePontoEntry extends StatelessWidget {
 }
 ```
 
-Insira `const BatePontoEntry()` no corpo de uma tela. O canal `com.pontotel.bateponto/sdk` e o método `open` devem coincidir exatamente com a ponte Kotlin. Não há pacote BatePonto a adicionar ao `pubspec.yaml`.
-
-**Para um botão com estado “Abrindo…” e bloqueio enquanto a solicitação está pendente**, use o [componente completo](exemplos/bateponto_button.dart), também explicado na [referência Flutter](index.html#integracao-flutter).
+Insira `const BatePontoEntry()` em uma tela; há um [botão com estado](exemplos/bateponto_button.dart). Canal e método devem coincidir com a ponte Kotlin; nada a adicionar ao `pubspec.yaml`.
 
 ### Entenda o retorno da chamada
 
-O `await` termina quando a ponte responde à **solicitação de abertura**. Ele não espera o usuário sair do BatePonto e não confirma login ou marcação. Esta versão não oferece callbacks de negócio, SSO nem API pública de logout.
+O `await` confirma só a **solicitação de abertura**. Não aguarda o fechamento nem confirma login ou marcação. Há callback de contexto, sem SSO ou API pública de logout.
 
-Depois de alterar Kotlin ou dependências Android, faça um **build completo e reinstale o aplicativo**. Hot reload não incorpora essas mudanças.
+Encaminhe `BatePontoSdk.addContextListener` ao Flutter pelo `EventChannel` `com.pontotel.bateponto/context`. Eventos trazem `user`, `company` e `collector` com `id`/`name` ou `null`; no logout, os três são `null`. Cancele a assinatura. O contexto não confirma marcação nem autorização.
+
+Após mudar Kotlin ou dependências Android, **recompile e reinstale o aplicativo**; hot reload não basta.
 
 ## Compile e valide
 
@@ -239,7 +239,7 @@ Instale o APK em um dispositivo ou emulador **ARM64**. O SDK usa o bundle embarc
 
 O login acontece dentro do BatePonto. Homologue login, marcação e reconhecimento facial em aparelhos reais antes de distribuir. O motor Luxand está incluído; a validação desta entrega não comprova biometria completa nem marcação real.
 
-Nesta geração, Bifrost fornece a configuração de Luxand e logs quando as chaves e o token do usuário estão disponíveis. Até o cadastro das chaves, o módulo usa a contingência local, também usada na primeira abertura offline. O app Flutter não precisa configurar Bifrost nem fornecer chaves. A geração com Bifrost passou nos builds e auditorias, mas ainda não foi executada em dispositivo.
+No modo SDK, a licença Luxand e a autorização dos logs vêm do Bifrost após o login. Falha ou resposta incompleta mostra erro e permite tentar novamente, sem fallback local. O host Flutter não fornece chaves. A versão 0.2.2 passou em builds e auditorias; o usuário confirmou o teste em emulador API 34 ARM64 em 02/10/2026. Aparelho físico e biometria completa ainda precisam de validação.
 
 ### Se algo impedir o primeiro teste
 
